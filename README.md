@@ -75,7 +75,7 @@ This was the plan I ended up with :
 
 ## Technologies Used
 
-- HTML5 with HTML5 audio
+- HTML5 with HTML5 audio and canvas (animated background)
 - CSS3 (grid, flexbox, custom properties, media queries)
 - JavaScript (ES6+)
 - Git and GitHub
@@ -135,6 +135,7 @@ Stretch goals: a small grid previewing the next tetromino and speeding the game 
 - Score, lines and levels, with the fall speed increasing per level.
 - Play/pause, reset, and pause / game over overlays.
 - Sound effects for locking, rotating, clearing lines, levels, pausing and game over.
+- Neon arcade look: glowing board frame, raised piece blocks, chunky 3D buttons and an animated synthwave background of drifting tetrominoes.
 - Responsive layout from phones to large monitors, with on-screen buttons on touch devices.
 
 ## Wins and Challenges
@@ -154,7 +155,8 @@ Revisiting the project later, I cleaned up the code while keeping the look and t
 - Game over, pause and reset no longer reload the page; they use an on-board overlay.
 - Levels are computed from the line count, and sounds are loaded once instead of reassigning `src` on every play.
 - Removed the debugging `console.log`s.
-- Rebuilt the layout with CSS grid and flexbox instead of absolute offsets and magic numbers, so it scales to any screen size.
+- Rebuilt the layout with CSS grid and flexbox instead of absolute offsets and magic numbers, so it scales to any screen size. On phones the stats and next piece move above the board and everything fits on one screen.
+- UI upgrade: same colours and layout, but with glow, bevelled blocks, pressable buttons and a canvas background (`background.js`) replacing the static image.
 
 ## Future Improvements
 

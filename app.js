@@ -104,25 +104,33 @@ function collides(p) {
 function render() {
   cells.forEach((cell, i) => {
     cell.style.backgroundColor = board[i] || "";
+    cell.classList.toggle("filled", Boolean(board[i]));
   });
   if (piece) {
     const color = TETROMINOS[piece.type].color;
     getSquares(piece).forEach(([x, y]) => {
-      if (y >= 0) cells[y * WIDTH + x].style.backgroundColor = color;
+      if (y >= 0) {
+        cells[y * WIDTH + x].style.backgroundColor = color;
+        cells[y * WIDTH + x].classList.add("filled");
+      }
     });
   }
 }
 
 function renderPreview() {
-  previewCells.forEach((cell) => (cell.style.backgroundColor = ""));
+  previewCells.forEach((cell) => {
+    cell.style.backgroundColor = "";
+    cell.classList.remove("filled");
+  });
   const shape = getShape(nextType, 0);
   const offsetX = Math.floor((4 - shape[0].length) / 2);
   const offsetY = Math.floor((4 - shape.length) / 2);
   shape.forEach((row, dy) =>
     row.forEach((filled, dx) => {
       if (filled) {
-        previewCells[(dy + offsetY) * 4 + dx + offsetX].style.backgroundColor =
-          TETROMINOS[nextType].color;
+        const cell = previewCells[(dy + offsetY) * 4 + dx + offsetX];
+        cell.style.backgroundColor = TETROMINOS[nextType].color;
+        cell.classList.add("filled");
       }
     })
   );
