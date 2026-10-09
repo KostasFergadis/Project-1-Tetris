@@ -50,6 +50,7 @@ Or serve the folder with any static server (for example the VS Code Live Server 
 - Left / right arrow keys move the tetromino.
 - Up arrow rotates it.
 - Down arrow drops it faster and scores a point per step.
+- On phones and tablets use the on-screen arrow buttons (hold to repeat).
 - Each completed line is worth 50 points.
 - A new level starts every 5 lines (level 2 at 5 lines, level 3 at 10, and so on) and the pieces fall faster.
 - The game ends when a new tetromino has no room to appear. Press Play/Pause or Reset to go again.
@@ -134,7 +135,7 @@ Stretch goals: a small grid previewing the next tetromino and speeding the game 
 - Score, lines and levels, with the fall speed increasing per level.
 - Play/pause, reset, and pause / game over overlays.
 - Sound effects for locking, rotating, clearing lines, levels, pausing and game over.
-- Responsive layout for desktop and mobile screens.
+- Responsive layout from phones to large monitors, with on-screen buttons on touch devices.
 
 ## Wins and Challenges
 
@@ -157,7 +158,6 @@ Revisiting the project later, I cleaned up the code while keeping the look and t
 
 ## Future Improvements
 
-- Touch controls for phones.
 - A high-score table.
 
 ## Key Learnings

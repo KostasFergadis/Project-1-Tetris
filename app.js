@@ -264,31 +264,59 @@ function togglePause() {
 // ---------- Input ----------
 const isRunning = () => timerId !== null && !isGameOver;
 
+const ACTIONS = {
+  left: () => move(-1),
+  right: () => move(1),
+  rotate: () => rotate(),
+  down: () => {
+    score++;
+    renderStats();
+    stepDown();
+  },
+};
+
+function doAction(name) {
+  if (!isRunning()) return;
+  ACTIONS[name]();
+  if (!isGameOver) render();
+}
+
+const KEY_ACTIONS = {
+  ArrowLeft: "left",
+  ArrowRight: "right",
+  ArrowUp: "rotate",
+  ArrowDown: "down",
+};
+
 document.addEventListener("keydown", (event) => {
-  if (event.code.startsWith("Arrow") || event.code === "Space") {
+  if (event.code in KEY_ACTIONS || event.code === "Space") {
     event.preventDefault(); // stop the page from scrolling
   }
-  if (!isRunning()) return;
+  const action = KEY_ACTIONS[event.code];
+  if (!action || (action === "rotate" && event.repeat)) return;
+  doAction(action);
+});
 
-  switch (event.code) {
-    case "ArrowLeft":
-      move(-1);
-      break;
-    case "ArrowRight":
-      move(1);
-      break;
-    case "ArrowDown":
-      score++;
-      renderStats();
-      stepDown();
-      break;
-    case "ArrowUp":
-      if (!event.repeat) rotate();
-      break;
-    default:
-      return;
-  }
-  if (!isGameOver) render();
+// On-screen buttons: hold to repeat (except rotate)
+let holdTimer = null;
+const stopHold = () => {
+  clearInterval(holdTimer);
+  holdTimer = null;
+};
+
+document.querySelectorAll(".touch-controls button").forEach((button) => {
+  const action = button.dataset.action;
+  button.addEventListener("pointerdown", (event) => {
+    event.preventDefault();
+    doAction(action);
+    if (action !== "rotate") {
+      stopHold();
+      holdTimer = setInterval(() => doAction(action), 120);
+    }
+  });
+  ["pointerup", "pointerleave", "pointercancel"].forEach((type) =>
+    button.addEventListener(type, stopHold)
+  );
 });
 
 playPauseBtn.addEventListener("click", () => {
