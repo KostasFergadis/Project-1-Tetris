@@ -2,7 +2,7 @@
 
 ![Gameplay](images/gameplay.png)
 
-Play Tetris [here](https://stylok5.github.io/Project-1-Tetris/)
+Play Tetris [here](https://kostasfergadis.github.io/Project-1-Tetris/)
 
 ## Table of Contents
 
@@ -37,7 +37,7 @@ This was my first project from General Assembly's Software Engineering Immersive
 No dependencies and no build step.
 
 ```
-git clone git@github.com:Stylok5/Project-1-Tetris.git
+git clone git@github.com:KostasFergadis/Project-1-Tetris.git
 cd Project-1-Tetris
 open index.html
 ```
