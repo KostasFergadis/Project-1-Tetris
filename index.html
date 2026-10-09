@@ -1,33 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tetris</title>
     <link href="https://fonts.cdnfonts.com/css/tetris" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel="stylesheet" href="main.css" />
     <script src="app.js" defer></script>
   </head>
   <body>
-    <div class="container">
-      <header>
-        <h1 class="Title">Tetris</h1>
-      </header>
-      <div class="progressContainer">
-        <section class="progress">
-          <h3>Score: <span class="score">0</span></h3>
-          <h3>Lines: <span class="lines">0</span></h3>
-          <h3 class="levels">Level 1</h3>
+    <main class="container">
+      <h1 class="title">Tetris</h1>
+
+      <div class="game">
+        <section class="side side-left">
+          <div class="progress">
+            <h3>Score: <span class="score">0</span></h3>
+            <h3>Lines: <span class="lines">0</span></h3>
+            <h3 class="level">Level 1</h3>
+          </div>
+          <button class="btn play-pause" type="button">Play/Pause</button>
+        </section>
+
+        <div class="board-wrapper">
+          <div class="grid" aria-label="Game board"></div>
+          <div class="overlay" hidden>
+            <h2 class="overlay-text"></h2>
+          </div>
+        </div>
+
+        <section class="side side-right">
+          <div class="next">
+            <h3 class="next-title">Next Tetromino</h3>
+            <div class="small-grid" aria-label="Next piece"></div>
+          </div>
+          <button class="btn reset" type="button">Reset</button>
         </section>
       </div>
-      <div class="allSmallGrid">
-        <h3 class="nextTetr">Next Tetromino</h3>
-        <div class="smallGrid"></div>
-      </div>
-      <div class="grid-wrapper">
-        <div class="grid"></div>
-      </div>
-      <button class="playPausebtn">Play/Pause</button>
-      <button class="resetBtn">Reset</button>
-    </div>
+
+      <p class="controls">
+        &larr; &rarr; move &nbsp;&middot;&nbsp; &uarr; rotate &nbsp;&middot;&nbsp;
+        &darr; faster
+      </p>
+    </main>
   </body>
-  <footer></footer>
 </html>

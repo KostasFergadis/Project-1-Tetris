@@ -1,216 +1,192 @@
+:root {
+  --cell: clamp(18px, 3.6vh, 32px);
+  --purple: rgb(179, 0, 255);
+  --cyan: rgb(80, 234, 234);
+  --gold: rgb(180, 180, 48);
+  --gold-shadow: rgb(95, 95, 26);
+  --red: rgb(215, 84, 84);
+  --red-shadow: rgb(127, 60, 60);
+}
+
 * {
   box-sizing: border-box;
   font-family: "Tetris", sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  background-image: url("tetrisBackground.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  position: relative; /* Add position relative to create a reference for absolute positioning */
+  gap: 1rem;
+  padding: 1rem;
 }
 
-.grid-wrapper {
-  display: flex;
-  justify-content: center;
-}
-.grid {
-  align-items: center;
-  display: flex;
-  margin-bottom: 6.4em;
-  flex-wrap: wrap;
-  transform: scale(0.6);
-  height: 500px;
-  width: 500px;
-  position: absolute;
-  bottom: 5em;
-}
-
-.grid div {
-  height: 10%;
-  width: 10%;
-  border: 1px solid grey;
-  background-color: black;
-}
-
-body {
-  background-size: 210vh;
-  background-position: calc(40%) -5%;
-  background-image: url("tetrisBackground.jpg");
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+.title {
   margin: 0;
-  background-color: #f0f0f0;
+  color: var(--purple);
+  font-size: clamp(40px, 9vh, 80px);
+  text-align: center;
 }
 
-.nextTetr {
-  position: relative;
-  left: 39px;
-  color: rgb(80, 234, 234);
+.game {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.5rem;
 }
-.allSmallGrid {
+
+.side {
   display: flex;
   flex-direction: column;
-  align-items: end;
-  position: relative;
-  left: 17em;
-  bottom: 18em;
+  align-items: center;
+  gap: 1.5rem;
+  width: calc(var(--cell) * 6);
 }
-.smallGrid {
-  display: flex;
-  width: 80px;
-  flex-wrap: wrap;
+
+/* Board */
+.board-wrapper {
+  position: relative;
+  border: 3px solid #222;
+  background: black;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(10, var(--cell));
+  grid-template-rows: repeat(20, var(--cell));
+}
+
+.grid div,
+.small-grid div {
+  border: 1px solid grey;
   background-color: black;
 }
 
-.smallGrid div {
-  height: 20px;
-  width: 20px;
-  border: 1px solid grey;
-}
-
-h1 {
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
   text-align: center;
-  position: relative;
-  bottom: 0.5em !important;
-  color: rgb(179, 0, 255);
-  font-size: 80px;
 }
 
+.overlay[hidden] {
+  display: none;
+}
+
+.overlay-text {
+  margin: 0;
+  color: wheat;
+  font-size: calc(var(--cell) * 1.3);
+}
+
+/* Side panels */
 .progress {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 5%;
+  background-color: var(--gold);
+  box-shadow: 10px 5px 5px var(--gold-shadow);
+}
+
+.progress h3 {
+  margin: 0.4em 0;
+  font-size: clamp(11px, 1.8vh, 16px);
+}
+
+.next {
   display: flex;
   flex-direction: column;
-  width: 170px;
-  position: relative;
-  right: 20em;
-  bottom: 5em;
-  padding: 20px 28px 20px 28px;
-  border-radius: 5%;
-  background-color: rgb(180, 180, 48);
-  box-shadow: 10px 5px 5px rgb(95, 95, 26);
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.playPausebtn {
-  background-color: rgb(215, 84, 84);
-  border: 1px solid rgb(185, 87, 87);
-  border-radius: 5%;
-  font-weight: bold;
-  cursor: pointer;
-  position: relative;
-  top: 2em;
-  right: 18em;
-  padding: 20px;
-  font-size: 18px;
-  box-shadow: 10px 5px 5px rgb(127, 60, 60);
-}
-.playPausebtn:active {
-  background-color: rgb(146, 40, 60);
-  border: 1px solid rgb(146, 40, 60);
-}
-
-.playPausebtn:hover {
-  transform: translateY(-2px);
-}
-
-.resetBtn {
-  background-color: rgb(215, 84, 84);
-  border: 1px solid rgb(185, 87, 87);
-  border-radius: 5%;
-  font-weight: bold;
-  position: relative;
-  bottom: 1.5em;
-  left: 17em;
-  cursor: pointer;
-  padding: 20px 45px 20px 45px;
-  font-size: 18px;
-  box-shadow: 10px 5px 5px rgb(107, 50, 50);
-}
-.resetBtn:hover {
-  transform: translateY(-2px);
-}
-.resetBtn:active {
-  background-color: rgb(146, 40, 60);
-  border: 1px solid rgb(146, 40, 60);
-}
-
-h1 {
+.next-title {
+  margin: 0;
+  color: var(--cyan);
+  font-size: clamp(11px, 1.8vh, 16px);
   text-align: center;
-  color: rgb(179, 0, 255);
-  font-size: 80px;
-  position: relative;
-  bottom: 50px;
 }
 
-@media only screen and (min-width: 1800px) {
-  .grid {
-    transform: scale(1);
-    bottom: 11em;
-  }
-  h1 {
-    position: relative;
-    bottom: 3.4em !important;
-  }
-  .allSmallGrid {
-    left: 26em;
-    bottom: 25em;
-    transform: scale(1.3);
-  }
-  .progress {
-    right: 31em !important;
-    bottom: 13em;
-  }
-  .playPausebtn {
-    right: 27em;
-    top: 15em;
-  }
-  .resetBtn {
-    left: 27em;
-    top: 12em;
-  }
+.small-grid {
+  display: grid;
+  grid-template-columns: repeat(4, calc(var(--cell) * 0.8));
+  grid-template-rows: repeat(4, calc(var(--cell) * 0.8));
+  background-color: black;
 }
 
-@media only screen and (max-width: 768px) {
-  .grid {
-    bottom: 2em !important;
-    transform: scale(0.5);
-  }
-  h1 {
-    bottom: 1.2em !important;
-  }
-  .progress {
-    width: 90px;
-    right: 19.3em;
-    bottom: 10em;
-    height: 150px;
-    font-size: 10px;
-    padding: 20px;
+/* Buttons */
+.btn {
+  width: 100%;
+  padding: 1rem 0.5rem;
+  border: 1px solid rgb(185, 87, 87);
+  border-radius: 5%;
+  background-color: var(--red);
+  box-shadow: 10px 5px 5px var(--red-shadow);
+  font-size: clamp(11px, 1.8vh, 18px);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  background-color: rgb(146, 40, 60);
+  border-color: rgb(146, 40, 60);
+}
+
+.controls {
+  margin: 0;
+  color: wheat;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Small screens: board on top, panels underneath */
+@media (max-width: 640px) {
+  :root {
+    --cell: min(7vw, 2.8vh);
   }
 
-  .playPausebtn {
-    right: 19em;
-    font-size: 10px;
-    width: 90px;
-    display: flex;
-    justify-content: center;
+  .container {
+    width: 100%;
   }
 
-  .resetBtn {
-    font-size: 10px;
-    width: 90px;
-    display: flex;
-    justify-content: center;
-    left: 19em;
-    bottom: 3.3em;
+  .game {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    width: 100%;
   }
-  .allSmallGrid {
-    left: 17.4em;
-    font-size: 10px;
-    bottom: 25em;
+
+  .board-wrapper {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    justify-self: center;
   }
-  .nextTetr {
-    left: 1em;
+
+  .side {
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .next-title {
+    display: none;
   }
 }
